@@ -44,8 +44,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Samples\AwaitSamples.cs" />
+    <Compile Include="Samples\CancelSamples.cs" />
     <Compile Include="Samples\OldThreadSamples.cs" />
     <Compile Include="Samples\ContinueSamples.cs" />
+    <Compile Include="Samples\ParallelSamples.cs" />
     <Compile Include="Things\Thing.cs" />
   </ItemGroup>
   <ItemGroup>
