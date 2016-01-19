@@ -45,9 +45,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Samples\AwaitSamples.cs" />
     <Compile Include="Samples\CancelSamples.cs" />
+    <Compile Include="Samples\ExceptionSamples.cs" />
+    <Compile Include="Samples\FanoutSamples.cs" />
+    <Compile Include="Samples\MutexSamples.cs" />
+    <Compile Include="Samples\UnsafeQueueSamples.cs" />
+    <Compile Include="Samples\ConcurrentQueueSamples.cs" />
     <Compile Include="Samples\OldThreadSamples.cs" />
     <Compile Include="Samples\ContinueSamples.cs" />
     <Compile Include="Samples\ParallelSamples.cs" />
+    <Compile Include="Samples\WhenAllSamples.cs" />
     <Compile Include="Things\Thing.cs" />
   </ItemGroup>
   <ItemGroup>

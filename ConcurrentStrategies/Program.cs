@@ -67,12 +67,24 @@ namespace ConcurrentStrategies
             var awaitSamples = new AwaitSamples();
             var continueSamples = new ContinueSamples();
             var cancelSamples = new CancelSamples();
+            var whenAllSamples = new WhenAllSamples();
+            var parallelSamples = new ParallelSamples();
+            var unsafeQueueSamples = new UnsafeQueueSamples();
+            var concurrentQueueSamples = new ConcurrentQueueSamples();
+            var mutexSamples = new MutexSamples();
+            var exceptionSamples = new ExceptionSamples();
 
             return new Dictionary<string, MenuOption>
             {
                 {"1", MenuOption.New("async/await", awaitSamples.DoWorkAsync)},
                 {"2", MenuOption.New("ContinueWith", continueSamples.DoWorkAsync)},
-                {"3", MenuOption.New("CancellationToken", cancelSamples.DoWorkAsync)}
+                {"3", MenuOption.New("CancellationToken", cancelSamples.DoWorkAsync)},
+                {"4", MenuOption.New("WhenAll", whenAllSamples.DoWorkAsync)},
+                {"5", MenuOption.New("AsParallel", parallelSamples.DoWorkAsync)},
+                {"6", MenuOption.New("Unsafe Queue<>", unsafeQueueSamples.DoWorkAsync)},
+                {"7", MenuOption.New("ConcurrentQueue<>", concurrentQueueSamples.DoWorkAsync)},
+                {"8", MenuOption.New("Mutex", mutexSamples.DoWorkAsync)},
+                {"9", MenuOption.New("Ex Handling", exceptionSamples.DoWorkAsync)}
             };
         }
 

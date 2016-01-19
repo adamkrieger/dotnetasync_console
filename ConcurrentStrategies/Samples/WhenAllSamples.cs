@@ -6,17 +6,27 @@ using System.Threading.Tasks;
 
 namespace ConcurrentStrategies.Samples
 {
-    internal class ParallelSamples
+    internal class WhenAllSamples
     {
         internal async Task DoWorkAsync()
         {
-            await Task.Run(() =>
+            await Task.Run(async () =>
             {
                 var numbers = Enumerable.Range(1, 10).ToArray();
 
                 var nonParallel = TimeIt("nonParallel", () => numbers.Select(WaitAndReturn).ToArray());
 
-                var parallel = TimeIt("parallel", () => numbers.AsParallel().Select(WaitAndReturn).ToArray());
+                var parallel = await TimeIt("parallel", async () =>
+                {
+                    var tasks = numbers
+                        .Select(each => Task
+                            .Run(() => WaitAndReturn(each))
+                            .ContinueWith(prev => PrintAndContinue(prev))
+                        )
+                        .ToArray();
+
+                    return await Task.WhenAll(tasks);
+                });
 
                 foreach (var i in nonParallel)
                 {
@@ -30,18 +40,25 @@ namespace ConcurrentStrategies.Samples
             });
         }
 
-        private int WaitAndReturn(int input)
+        private static int WaitAndReturn(int input)
         {
             Thread.SpinWait(200000000);
             return input * 10;
         }
 
-        private T TimeIt<T>(string description, Func<T> func)
+        private static int PrintAndContinue(Task<int> prev)
         {
-            var stopwatch =new Stopwatch();
+            var result = prev.Result;
+            Console.WriteLine("Done {0}", result);
+            return result;
+        }
+
+        private static T TimeIt<T>(string description, Func<T> func)
+        {
+            var stopwatch = new Stopwatch();
 
             Console.WriteLine("Starting: {0}", description);
-            
+
             stopwatch.Start();
             var result = func();
             stopwatch.Stop();
